@@ -17,8 +17,8 @@ RUN mvn install -DskipTests
 
 #RUN echo "$PWD" --no-cache
 
-WORKDIR /workspace/app/target
-#WORKDIR /
+#WORKDIR /workspace/app/target
+WORKDIR /
 
 COPY target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
 
