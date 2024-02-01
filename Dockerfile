@@ -21,11 +21,7 @@ WORKDIR /workspace/app
 #WORKDIR /workspace/app/target
 #WORKDIR /
 
-Run ls
-Run cd /target
-Run ls
-
-COPY target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
+ADD target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
 
 #EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
