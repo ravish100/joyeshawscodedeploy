@@ -9,13 +9,13 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
     rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
     mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
 
-WORKDIR /workspace/app
+WORKDIR /workspace/app --no-cache
 
-COPY pom.xml .
-COPY src src
-RUN mvn install -DskipTests
+COPY pom.xml . --no-cache
+COPY src src --no-cache
+RUN mvn install -DskipTests --no-cache
 
-RUN echo "$PWD" --no-cache
+#RUN echo "$PWD" --no-cache
 
 
 #WORKDIR /
