@@ -15,7 +15,7 @@ COPY pom.xml .
 COPY src src
 RUN mvn install -DskipTests
 
-RUN echo "$PWD"
+RUN echo "$PWD" --no-cache
 
 
 #WORKDIR /
