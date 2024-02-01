@@ -1,32 +1,12 @@
-FROM openjdk:21-jdk
+# Using following Base image because it already has maven and java 21 installed
+FROM maven:3.9.6-amazoncorretto-21
 
-
-ENV MAVEN_VERSION 3.5.4
-ENV MAVEN_HOME /usr/lib/mvn
-ENV PATH $MAVEN_HOME/bin:$PATH
-
-RUN yum -y install wget
-
-RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-    tar -zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-    rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-    mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
-
-#WORKDIR /workspace
 WORKDIR /workspace/app
-
+#copy pom and source code from local system to /workspace/app in docker container
 COPY pom.xml .
 COPY src src
+#build spring boot project
 RUN mvn install -DskipTests
 
-#RUN echo "$PWD" --no-cache
-
-#WORKDIR /workspace/app
-#WORKDIR /workspace/app/target
-WORKDIR /
-
-#COPY /target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
-COPY /target/*.jar app.jar
-
-#EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar"]
+# defining entrypoint for when docker run will be invoked
+ENTRYPOINT ["java","-jar","/workspace/app/target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar"]
