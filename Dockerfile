@@ -9,7 +9,7 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
     rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
     mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
 
-WORKDIR /workspace
+#WORKDIR /workspace
 
 COPY pom.xml .
 COPY src src
@@ -17,11 +17,11 @@ RUN mvn install -DskipTests
 
 #RUN echo "$PWD" --no-cache
 
-WORKDIR /workspace/app
+#WORKDIR /workspace/app
 #WORKDIR /workspace/app/target
-#WORKDIR /
+WORKDIR /
 
-ADD target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
+COPY target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
 
 #EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
