@@ -12,14 +12,14 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
 #WORKDIR /workspace
 
 COPY pom.xml .
-COPY src src
+#COPY src src
 RUN mvn install -DskipTests
 
 #RUN echo "$PWD" --no-cache
 
 #WORKDIR /workspace/app
 #WORKDIR /workspace/app/target
-WORKDIR /target
+WORKDIR /
 
 COPY target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
 
