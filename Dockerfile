@@ -5,7 +5,7 @@ ENV MAVEN_VERSION 3.5.4
 ENV MAVEN_HOME /usr/lib/mvn
 ENV PATH $MAVEN_HOME/bin:$PATH
 
-RUN  apt-get update \
+#RUN  apt-get update \
   && apt-get install -y wget \
   && rm -rf /var/lib/apt/lists/*
 
@@ -25,7 +25,7 @@ RUN mvn install -DskipTests
 
 #WORKDIR /workspace/app
 #WORKDIR /workspace/app/target
-#WORKDIR /
+WORKDIR /
 
 #COPY /target/joyeshspringbootrestapi1-0.0.1-SNAPSHOT.jar app.jar
 COPY /target/*.jar app.jar
