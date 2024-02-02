@@ -16,7 +16,7 @@ phases:
       #- APPLICATION_NAME=ravishjoyeshecr1private
       # Replace with this 435320931996.dkr.ecr.ap-south-1.amazonaws.com to your repository URI
       #- REPOSITORY_URI=533267298852.dkr.ecr.us-east-1.amazonaws.com/$APPLICATION_NAME
-       - REPOSITORY_URI=public.ecr.aws/i4z9u2i9/$APPLICATION_NAME
+      - REPOSITORY_URI=public.ecr.aws/i4z9u2i9/$APPLICATION_NAME
   build:
     commands:
       - echo Build started on `date`
