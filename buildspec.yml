@@ -4,19 +4,19 @@ phases:
     commands:
       - echo Logging in to Amazon ECR....
       - aws --version
-      - $(aws ecr-public get-login-password  --region us-east-1)
-      #- $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267298852.dkr.ecr.region.amazonaws.com)
+      #- $(aws ecr-public get-login-password  --region us-east-1)
+      - $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267298852.dkr.ecr.region.amazonaws.com)
       #- $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i4z9u2i9)
 
       # Get commit hash value to tag the image
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       # Replace with your application name
-      - APPLICATION_NAME=ravishjoyeshecr1
-      #- APPLICATION_NAME=ravishjoyeshecr1private
+      #- APPLICATION_NAME=ravishjoyeshecr1
+      - APPLICATION_NAME=ravishjoyeshecr1private
       # Replace with this 435320931996.dkr.ecr.ap-south-1.amazonaws.com to your repository URI
-      #- REPOSITORY_URI=533267298852.dkr.ecr.us-east-1.amazonaws.com/$APPLICATION_NAME
-      - REPOSITORY_URI=public.ecr.aws/i4z9u2i9/$APPLICATION_NAME
+      - REPOSITORY_URI=533267298852.dkr.ecr.us-east-1.amazonaws.com/$APPLICATION_NAME
+      #- REPOSITORY_URI=public.ecr.aws/i4z9u2i9/$APPLICATION_NAME
   build:
     commands:
       - echo Build started on `date`
