@@ -5,8 +5,12 @@ phases:
       - echo Logging in to Amazon ECR....
       - aws --version
       #- $(aws ecr-public get-login-password  --region us-east-1)
-      - $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267298852.dkr.ecr.us-east-1.amazonaws.com)
+      #- $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267298852.dkr.ecr.us-east-1.amazonaws.com)
       #- $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i4z9u2i9)
+
+      - ECR_PASSWORD=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION)
+      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
+      - echo -n ${ECR_PASSWORD} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
 
       # Get commit hash value to tag the image
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
